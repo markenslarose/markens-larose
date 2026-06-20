@@ -1,9 +1,9 @@
 'use client'
-
+ 
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { AboutModal } from './ui/about/modal'
-
+ 
 const LINKS = [
   { label: 'Accueil', href: '#accueil' },
   { label: 'Vision', href: '#vision' },
@@ -14,28 +14,28 @@ const LINKS = [
   { label: 'Galerie', href: '#galerie' },
   { label: 'Contact', href: '#contact' },
 ]
-
+ 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [active, setActive] = useState('#accueil')
-
+ 
   // ✅ FIX: modal state ajouté
   const [isAboutOpen, setIsAboutOpen] = useState(false)
-
+ 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 40)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
-
+ 
   useEffect(() => {
     const ids = LINKS.map((l) => l.href.slice(1))
     const sections = ids
       .map((id) => document.getElementById(id))
       .filter(Boolean)
-
+ 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -44,13 +44,13 @@ export function Navbar() {
       },
       { rootMargin: '-45% 0px -50% 0px' },
     )
-
+ 
     sections.forEach((s) => {
-  if (s) observer.observe(s)
-})
+      if (s) observer.observe(s)
+    })
     return () => observer.disconnect()
   }, [])
-
+ 
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
@@ -68,7 +68,7 @@ export function Navbar() {
             Markens Larose
           </span>
         </a>
-
+ 
         {/* Desktop links */}
         <div className="hidden items-center gap-7 lg:flex">
           {LINKS.map((link) => (
@@ -95,25 +95,34 @@ export function Navbar() {
             </div>
           ))}
         </div>
-
+ 
+        {/* Bouton desktop (rete kòm li te ye) */}
         <a
           href="#contact"
           className="hidden rounded-md bg-royal px-5 py-2.5 font-display text-sm text-white shadow-[0_0_20px_-4px_rgba(37,99,235,0.6)] transition-all hover:bg-royal-glow hover:shadow-[0_0_28px_-2px_rgba(37,99,235,0.85)] lg:inline-block"
         >
           Voter Markens
         </a>
-
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setOpen((v) => !v)}
-          className="text-foreground lg:hidden"
-          aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
-        >
-          {open ? <X size={26} /> : <Menu size={26} />}
-        </button>
+ 
+        {/* Mobile: bouton Voter + toggle ☰, kòl ansanm sou bar anwo a */}
+        <div className="flex items-center gap-3 lg:hidden">
+          <a
+            href="#contact"
+            className="inline-block rounded-md bg-royal px-3.5 py-2 font-display text-xs text-white shadow-[0_0_16px_-4px_rgba(37,99,235,0.6)] transition-all hover:bg-royal-glow"
+          >
+            Voter Markens
+          </a>
+          <button
+            onClick={() => setOpen((v) => !v)}
+            className="text-foreground"
+            aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
+          >
+            {open ? <X size={26} /> : <Menu size={26} />}
+          </button>
+        </div>
       </nav>
-
-      {/* Mobile menu */}
+ 
+      {/* Mobile menu (lis lyen yo sèlman, pa gen bouton Voter ladan l) */}
       <div
         className={`overflow-hidden border-t border-border bg-[#0D1321]/98 backdrop-blur-md transition-[max-height] duration-300 lg:hidden ${
           open ? 'max-h-96' : 'max-h-0 border-t-0'
@@ -149,7 +158,7 @@ export function Navbar() {
           ))}
         </div>
       </div>
-
+ 
       {/* MODAL (NO DESIGN CHANGE) */}
       <AboutModal
         isOpen={isAboutOpen}
@@ -158,3 +167,4 @@ export function Navbar() {
     </header>
   )
 }
+ 
