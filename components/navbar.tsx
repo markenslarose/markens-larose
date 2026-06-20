@@ -96,9 +96,9 @@ export function Navbar() {
           ))}
         </div>
  
-        {/* Bouton desktop (rete kòm li te ye) */}
+        {/* Bouton desktop — vize fòm lan dirèkteman */}
         <a
-          href="#contact"
+          href="#contact-form"
           className="hidden rounded-md bg-royal px-5 py-2.5 font-display text-sm text-white shadow-[0_0_20px_-4px_rgba(37,99,235,0.6)] transition-all hover:bg-royal-glow hover:shadow-[0_0_28px_-2px_rgba(37,99,235,0.85)] lg:inline-block"
         >
           Voter Markens
@@ -107,7 +107,7 @@ export function Navbar() {
         {/* Mobile: bouton Voter + toggle ☰, kòl ansanm sou bar anwo a */}
         <div className="flex items-center gap-3 lg:hidden">
           <a
-            href="#contact"
+            href="#contact-form"
             className="inline-block rounded-md bg-royal px-3.5 py-2 font-display text-xs text-white shadow-[0_0_16px_-4px_rgba(37,99,235,0.6)] transition-all hover:bg-royal-glow"
           >
             Voter Markens

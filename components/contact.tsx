@@ -1,27 +1,27 @@
 'use client'
-
+ 
 import { useState } from 'react'
 import { useReveal } from './use-reveal'
 import { Mail, MapPin, Phone, Send } from 'lucide-react'
 import emailjs from '@emailjs/browser'
-
+ 
 export function Contact() {
   const head = useReveal()
   const form = useReveal()
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
-
+ 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
-
+ 
    emailjs.sendForm(
   'service_ztmnot2',
   'template_7yz4kr5',
   e.currentTarget,
   'Tgj4SJDZLaeXFKmpD'
 )
-
+ 
     .then(() => {
       setLoading(false)
       setSubmitted(true)
@@ -32,7 +32,7 @@ export function Contact() {
       alert('Erreur lors de l’envoi du message')
     })
   }
-
+ 
   return (
     <section id="contact" className="relative overflow-hidden bg-surface py-24">
       <div
@@ -42,7 +42,7 @@ export function Contact() {
             'radial-gradient(circle at 20% 30%, rgba(37,99,235,0.5), transparent 40%), radial-gradient(circle at 80% 70%, rgba(37,99,235,0.4), transparent 40%)',
         }}
       />
-
+ 
       <div className="relative mx-auto max-w-7xl px-5 lg:px-8">
         {/* HEADER */}
         <div
@@ -59,7 +59,7 @@ export function Contact() {
             Votre voix compte. Envoyez-nous un message ou devenez volontaire.
           </p>
         </div>
-
+ 
         <div className="mt-14 grid gap-10 lg:grid-cols-5">
           {/* INFO */}
           <div className="space-y-6 lg:col-span-2">
@@ -82,9 +82,10 @@ export function Contact() {
               </div>
             ))}
           </div>
-
-          {/* FORM */}
+ 
+          {/* FORM — id separe "contact-form" pou bouton Voter ka vize fòm lan dirèkteman */}
           <div
+            id="contact-form"
             ref={form.ref}
             className={`reveal rounded-2xl border border-border bg-card p-7 lg:col-span-3 ${
               form.visible ? 'is-visible' : ''
@@ -108,9 +109,9 @@ export function Contact() {
                   <Field label="Nom complet" name="name" type="text" placeholder="Jean Baptiste" />
                   <Field label="Téléphone" name="phone" type="tel" placeholder="+509 ..." />
                 </div>
-
+ 
                 <Field label="Email" name="email" type="email" placeholder="vous@email.com" />
-
+ 
                 <div>
                   <label htmlFor="message" className="mb-2 block font-display text-sm text-foreground">
                     Message
@@ -124,7 +125,7 @@ export function Contact() {
                     className="w-full rounded-lg border border-border bg-surface px-4 py-3 text-foreground outline-none transition-colors placeholder:text-muted-text/60 focus:border-royal"
                   />
                 </div>
-
+ 
                 <button
                   type="submit"
                   disabled={loading}
@@ -141,7 +142,7 @@ export function Contact() {
     </section>
   )
 }
-
+ 
 function Field({
   label,
   name,
@@ -169,3 +170,4 @@ function Field({
     </div>
   )
 }
+ 
