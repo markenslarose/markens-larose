@@ -25,7 +25,7 @@ const BIOGRAPHY = [
   },
   {
     title: "Vision Politique",
-    text: "Candidat Député avec une vision claire et un programme solide, Markens Larose aspire à représenter dignement son peuple au parlement. Il croit en une politique de proximité, transparente et orientée vers des résultats concrets pour améliorer les conditions de vie de chaque citoyen.",
+    text: "Candidat à la Députation, porteur d’une vision claire et d’un programme solide, Markens Larose aspire à représenter dignement son peuple au parlement. Il croit en une politique de proximité, transparente et orientée vers des résultats concrets pour améliorer les conditions de vie de chaque citoyen.",
   },
 ]
 
