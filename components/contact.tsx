@@ -15,12 +15,13 @@ export function Contact() {
     e.preventDefault()
     setLoading(true)
 
-    emailjs.sendForm(
-      'service_cujnug7',
-      'template_maxpq1g',
-      e.currentTarget,
-      'Tgj4SJDZLaeXFKmpD'
-    )
+   emailjs.sendForm(
+  'service_ztmnot2',
+  'template_7yz4kr5',
+  e.currentTarget,
+  'Tgj4SJDZLaeXFKmpD'
+)
+
     .then(() => {
       setLoading(false)
       setSubmitted(true)
