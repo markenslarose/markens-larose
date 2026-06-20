@@ -1,7 +1,16 @@
-import { Analytics } from '@vercel/analytics/next'
 import type { Metadata } from 'next'
 import { Playfair_Display, Inter, Bebas_Neue } from 'next/font/google'
 import './globals.css'
+
+// ⚠️ Analytics import kept but made safe for Netlify build
+// (we prevent runtime crash if module is unavailable)
+let Analytics: any = null
+
+try {
+  Analytics = require('@vercel/analytics/next').Analytics
+} catch (e) {
+  Analytics = null
+}
 
 const playfair = Playfair_Display({
   variable: '--font-playfair',
@@ -26,8 +35,7 @@ export const metadata: Metadata = {
   metadataBase: new URL('https://www.markenslarose.com'),
 
   title: {
-    default:
-      'Markens Larose — Candidat Député | La Voix du Peuple Haïtien',
+    default: 'Markens Larose — Candidat Député | La Voix du Peuple Haïtien',
     template: '%s | Markens Larose — Candidat Député',
   },
 
@@ -46,7 +54,6 @@ export const metadata: Metadata = {
   ],
 
   authors: [{ name: 'Markens Larose' }],
-
   creator: 'Markens Larose',
 
   alternates: {
@@ -93,7 +100,6 @@ export const metadata: Metadata = {
   },
 
   category: 'Politics',
-
   generator: 'Next.js',
 }
 
@@ -114,7 +120,11 @@ export default function RootLayout({
     >
       <body className="font-sans antialiased">
         {children}
-        {process.env.NODE_ENV === 'production' && <Analytics />}
+
+        {/* Safe analytics for Netlify */}
+        {process.env.NODE_ENV === 'production' && Analytics && (
+          <Analytics />
+        )}
       </body>
     </html>
   )
